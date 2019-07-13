@@ -1,3 +1,2 @@
-vidtext
 gunicorn
 flask
