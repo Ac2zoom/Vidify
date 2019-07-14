@@ -45,4 +45,5 @@ def get_key_phrases(url_or_file=FILE_NAME, words=None):
     return text_summ, phrases_list
 
 
-print(get_key_phrases())
+if __name__ == '__main__':
+    print(get_key_phrases())
