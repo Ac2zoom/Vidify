@@ -14,9 +14,12 @@ def make_slides(description_map, vid_hash):
     image_arr = []
     count = 0
     for keyword in description_map:
-        get_image(keyword)
+        if count > 5:
+            break
+        # This assumes that keyword is a list
+        image_path = get_image(", ".join(keyword))
         description = description_map[keyword]
-        image = overlay_text_on_image(keyword, description, vid_hash, count)
+        image = overlay_text_on_image(image_path[0].keys()[0], description, vid_hash, count)
         image_arr.append(image)
         count += 1
     return image_arr
@@ -96,7 +99,7 @@ def get_back_size(description, font_size, draw, font):
 
 def insert_newline(description, font_size):
     char_count = 0
-    words = description.split(' ')
+    words = ''.join(description).split(' ')
     for i in range(len(words)):
         char_count += len(words[i]) + 1
         if (char_count * (int)(font_size * (0.5))) > 1200:

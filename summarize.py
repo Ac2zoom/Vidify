@@ -8,7 +8,7 @@ comprehend = boto3.client(service_name='comprehend', region_name='us-west-2')
 FILE_NAME = "/home/rock/data/angelhack_vidify/sample.txt"
 
 
-def get_key_phrases(url_or_file=FILE_NAME, words=None):
+def get_key_phrases(url_or_file=None, words=None):
     """
     Returns a tuple having (gensim_summarization, comprehend_phrases)
     """
@@ -27,17 +27,24 @@ def get_key_phrases(url_or_file=FILE_NAME, words=None):
         Get phrases from Amazon Comprehend
         """
         text_summ_list = text_summ.split("\n")
+        print("Summary: " + text_summ)
         phrases = [None] * len(text_summ_list)
         for i in range(len(text_summ_list)):
             sentence = text_summ_list[i]
+            print(sentence)
             key_phrases = json.dumps(comprehend.detect_key_phrases(Text=sentence, LanguageCode='en'))
             kp_ld = (json.loads(key_phrases))["KeyPhrases"]
-            sent_phrases = [phrase['Text'] for phrase in kp_ld if len(phrase['Text'].split()) > 1 ]
+            sent_phrases = [phrase['Text'] for phrase in kp_ld if len(phrase['Text'].split()) > 1]
             phrases[i] = sent_phrases
         return phrases
 
     # get the text summary using gensim. 10% of all sentences
-    text_summ = summarize(text, ratio=0.10)
+    ratio = 0.1
+    if len(text) < 100:
+        ratio = 1
+    text_summ = summarize(text, ratio=ratio)
+    if text_summ is "":
+        text_summ = text
 
     # get the key phrases from the gensim summarization using Amazon Comprehend
     phrases_list = comprehend_phrases(text_summ)

@@ -34,9 +34,10 @@ def vidify():
     source_url = request.args.get('source')
     text = request.args.get('text')
     # Summarize text
-    content = get_key_phrases(text)  # Return Tuple of Gensim Summarization and Comprehend_Phrases
+    # Return Tuple of Gensim Summarization and Comprehend_Phrases
+    content = get_key_phrases(url_or_file=None, words=text)
     # TODO: Verify that this works given that each index of content[1] is a list
-    vid_hash = hex(hash(''.join(content[1])))
+    vid_hash = hex(hash(str(content[1])))
     gen_video(content, vid_hash)
     return render_template("video.html", source=source_url, video="/video/" + vid_hash)
 
