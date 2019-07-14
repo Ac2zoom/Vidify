@@ -13,6 +13,16 @@ BUFF_SIZE = 10 * MB
 
 @app.route('/')
 def index():
+    return render_template('page1.html')
+
+
+@app.route('/assets/<file>')
+def asset(file):
+    return send_file('assets/' + file)
+
+
+@app.route('/demo')
+def demo():
     # Form for source and text
     return render_template('index.html')
 
@@ -24,7 +34,8 @@ def vidify():
     text = request.args.get('text')
     # Summarize text
     content = get_key_phrases(text)  # Return Tuple of Gensim Summarization and Comprehend_Phrases
-    vid_hash = hex(hash(''.join(content.values())))
+    # TODO: Verify that this works given that each index of content[1] is a list
+    vid_hash = hex(hash(''.join(content[1])))
     gen_video(content, vid_hash)
     return render_template("video.html", source=source_url, video="/video/" + vid_hash)
 
