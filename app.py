@@ -60,20 +60,27 @@ def gen_video(content, vid_hash):
     vs = 0.2
     # size = (1280, 720)
     # TODO: Switch to using ffmpeg-python
-
-    for i in range(len(content[1]))
-
+    
+    # Create file to build up reading sound
     sound = new AudioSegment()
 
-    for file in os.listdir("slides/")
+    # Loop through all sentences and create a recording for each one
+    for i in range(len(sentence_list))
         synth = new PollySynth()
-        speach = synth.mp3_speak("img" + i + ".mp3", content)
+        speach = synth.mp3_speak("img" + i + ".mp3", sentence_list[i], None)
+        # TODO: Get time to play file
+        # TODO: Make individual slide videos
 
+        # Concatenate up a singular sound file
         sound += speach
-
+    # Build a singular sound file
     sound.export("complete_reading.mp3", format="mp3")
+
+    # Merge sound and video file
     videoMP4 = ffmpeg.input("video.mp4")
     audioMP3 = ffmpeg.input("complete_reading.mp3")
     merged = ffmpeg.concat(videoMP4, audioMP3, v=1, a=1)
-    output  = ffmpeg.output(merged[0], merged[1], "merged.mp4")
+    output  = ffmpeg.output(merged[0], merged[1], "video.mp4")
+
+    # Not sure we need this here since output will create the final video
     os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
