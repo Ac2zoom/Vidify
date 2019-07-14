@@ -13,13 +13,17 @@ def make_slides(description_map, vid_hash):
     """
     image_arr = []
     count = 0
-    for keyword in description_map:
+    for description in description_map:
+        print("Description: " + str(description))
         if count > 5:
             break
-        # This assumes that keyword is a list
-        image_path = get_image(", ".join(keyword))
-        description = description_map[keyword]
-        image = overlay_text_on_image(image_path[0].keys()[0], description, vid_hash, count)
+        # This assumes that description's value is a list
+        keywords = " ".join(description_map[description])
+        if keywords is "":
+            continue
+        image_path = get_image(keywords)
+        print(image_path)
+        image = overlay_text_on_image(image_path[0][list(image_path[0].keys())[0]][0], description, vid_hash, count)
         image_arr.append(image)
         count += 1
     return image_arr
@@ -31,6 +35,7 @@ def get_image(keywords):
     @keywords:  a comma separated list of keywords for images
     @return:    Saves the images to the downloads folder
     """
+    print("Keywords: " + keywords)
     response = google_images_download.googleimagesdownload()
     arguments = {
         "keywords": keywords,
@@ -44,15 +49,13 @@ def get_image(keywords):
     return response.download(arguments)
 
 
-def overlay_text_on_image(keyword, description, vid_hash, count):
+def overlay_text_on_image(filename, description, vid_hash, count):
     """
     Finds the image associated with that keyword and overlays the description over the top of it
     @keyword:       The title of the image that needs a description (String)
     @description:   Short sentence to overlay on the image (String)
     @return:        Saves the image to 'slides' folder
     """
-    filename = os.listdir("downloads/" + keyword)[0]
-
     # truetype(font.ttf, font-size)
     font_style = "HelveticaNeue Medium.ttf"
     font_size = 30
@@ -61,7 +64,7 @@ def overlay_text_on_image(keyword, description, vid_hash, count):
     # (R, G, B)
     font_color = (250, 250, 250)
     background_color = (0, 0, 0)
-    img = Image.open("downloads/" + keyword + "/" + filename)
+    img = Image.open(filename)
 
     img = img.resize((1280, 720), resample=0)
     draw = ImageDraw.Draw(img)

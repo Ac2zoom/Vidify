@@ -27,7 +27,6 @@ def get_key_phrases(url_or_file=None, words=None):
         Get phrases from Amazon Comprehend
         """
         text_summ_list = text_summ.split("\n")
-        print("Summary: " + text_summ)
         phrases = [None] * len(text_summ_list)
         for i in range(len(text_summ_list)):
             sentence = text_summ_list[i]
