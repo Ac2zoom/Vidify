@@ -84,6 +84,7 @@ def overlay_text_on_image(keyword, description, vid_hash, count):
 
     return new_filename
 
+
 def get_back_size(description, font_size, draw, font):
     length = draw.textsize(description, font)
     return_length = (length[0] + 80, length[1] + 70)
@@ -91,6 +92,7 @@ def get_back_size(description, font_size, draw, font):
         return (25, 35)
     else:
         return return_length
+
 
 def insert_newline(description, font_size):
     char_count = 0
