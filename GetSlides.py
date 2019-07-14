@@ -27,7 +27,7 @@ Finds all the images for the given keywords and downloads them into the download
 def get_image(keywords):
     response = google_images_download.googleimagesdownload()
     arguments = {"keywords":keywords,
-    "suffix_keywords":"no watermark",
+    # "suffix_keywords":"no watermark",
     "format":"jpg",
     "aspect_ratio":"wide",
     "usage_rights":"labeled-for-reuse-with-modifications",
@@ -43,7 +43,7 @@ Finds the image associated with that keyword and overlays the description over t
 @return:        Saves the image to 'slides' folder
 """
 def overlay_text_on_image(keyword, description):
-    keyword = keyword + " no watermark"
+    # keyword = keyword + " no watermark"
     for file in os.listdir("downloads/" + keyword):
         filename = file
     
@@ -64,5 +64,6 @@ def overlay_text_on_image(keyword, description):
     # text(position, text, color, font)
     draw.text(font_placement, description, font_color, font=font)
     draw = ImageDraw.Draw(img)
-    img.save("slides/" + keyword + ".png")
-    return cv2.imread(filename)
+    new_filename = "slides/" + keyword + ".png"
+    img.save(new_filename)
+    return cv2.imread(new_filename)
