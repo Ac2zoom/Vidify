@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, send_file
 import cv2
 import GetSlides
 import re
@@ -18,7 +18,7 @@ def summary(data):
 
 
 @app.route('/')
-def hello_world():
+def index():
     # Form for source and text
     return render_template('index.html')
 
@@ -36,60 +36,7 @@ def vidify():
 
 @app.route("/video/<vid_hash>", methods=['GET', 'POST'])
 def video(vid_hash):
-    path = 'videos/' + vid_hash + '.mp4'
-
-    start, end = get_range(request)
-    return partial_response(path, start, end)
-
-
-def partial_response(path, start, end=None):
-    global BUFF_SIZE
-    file_size = os.path.getsize(path)
-
-    # Determine (end, length)
-    if end is None:
-        end = start + BUFF_SIZE - 1
-    end = min(end, file_size - 1)
-    end = min(end, start + BUFF_SIZE - 1)
-    length = end - start + 1
-
-    # Read file
-    with open(path, 'rb') as fd:
-        fd.seek(start)
-        bytes = fd.read(length)
-    assert len(bytes) == length
-
-    response = Response(
-        bytes,
-        206,
-        mimetype=mimetypes.guess_type(path)[0],
-        direct_passthrough=True,
-    )
-    response.headers.add(
-        'Content-Range', 'bytes {0}-{1}/{2}'.format(
-            start, end, file_size,
-        ),
-    )
-    response.headers.add(
-        'Accept-Ranges', 'bytes'
-    )
-    return response
-
-
-def get_range(request):
-    range = request.headers.get('Range')
-    print(request.headers)
-    m = re.match('bytes=(?P<start>\d+)-(?P<end>\d+)?', range)
-    if m:
-        start = m.group('start')
-        end = m.group('end')
-        start = int(start)
-        if end is not None:
-            end = int(end)
-        print(start, end)
-        return start, end
-    else:
-        return 0, None
+    return send_file('videos/' + vid_hash + '.mp4')
 
 
 def gen_video(content):
@@ -102,8 +49,7 @@ def gen_video(content):
     # TODO: Accept vs, size, and font from user
     vs = 0.1
     size = (1280, 720)
-    out = cv2.VideoWriter('videos/' + hex(hash(''.join(content))) + '.mp4', cv2.VideoWriter_fourcc(*'mp4v'), vs, size)
+    out = cv2.VideoWriter('videos/' + hex(hash(''.join(content))) + '.mp4', cv2.VideoWriter_fourcc(*'H264'), vs, size)
     for i in range(len(img_array)):
         out.write(img_array[i])
     out.release()
-

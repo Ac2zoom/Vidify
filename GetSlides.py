@@ -28,15 +28,16 @@ def get_image(keywords):
     @return:    Saves the images to the downloads folder
     """
     response = google_images_download.googleimagesdownload()
-    arguments = {"keywords":keywords,
-    # "suffix_keywords":"no watermark",
-    "format":"jpg",
-    "aspect_ratio":"wide",
-    "usage_rights":"labeled-for-reuse-with-modifications",
-    "limit":1,
-    "size":"large",
-    "print_urls":True}
-    paths = response.download(arguments)
+    arguments = {
+        "keywords": keywords,
+        # "suffix_keywords":"no watermark",
+        "format": "jpg",
+        "aspect_ratio": "wide",
+        "usage_rights": "labeled-for-reuse-with-modifications",
+        "limit": 1,
+        "size": "large",
+        "print_urls": True}
+    return response.download(arguments)
 
 
 def overlay_text_on_image(keyword, description):
@@ -57,7 +58,6 @@ def overlay_text_on_image(keyword, description):
     background_color = (0, 0, 0)
     background_size = get_back_size(description)
 
-
     img = Image.open("downloads/" + keyword + "/" + filename)
     # img = img.convert('RGB')
 
@@ -75,6 +75,7 @@ def overlay_text_on_image(keyword, description):
     img.save(new_filename)
     return cv2.imread(new_filename)
 
+
 def get_back_size(description):
     line_count = 125
     lines = description.split('\n')
@@ -85,6 +86,6 @@ def get_back_size(description):
             
     # length = len(description)
     if length == 0:
-        return (25, 35)
+        return 25, 35
     else:
-        return (length*29, line_count)
+        return length*29, line_count
