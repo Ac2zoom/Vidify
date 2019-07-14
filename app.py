@@ -4,7 +4,6 @@ import os
 import pollymode
 from summarize import get_key_phrases
 from pydub import AudioSegment
-import ffmpeg
 import os.path
 from os import path
 
@@ -80,12 +79,12 @@ def gen_video(content, vid_hash):
         time = speech_temp.duration_seconds
         vs = 1 / time
         if path.exists("slides/video.mp4"):
-            os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-" + "{:02d}".format(i) +
+            os.system("cd slides/" + vid_hash + "; ffmpeg -y -framerate " + str(vs) + " -i img-" + "{:02d}".format(i) +
                       ".png video2.mp4")
             os.system("cd slides/" + vid_hash +
-                      "; printf \"file 'video.mp4'\nfile 'video2.mp4'\" > mylist.txt; ffmpeg -f concat -safe 0 -i mylist.txt -c copy video.mp4")
+                      "; printf \"file 'video.mp4'\nfile 'video2.mp4'\" > mylist.txt; ffmpeg -y -f concat -safe 0 -i mylist.txt -c copy video.mp4")
         else:
-            os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-" + "{:02d}".format(i) +
+            os.system("cd slides/" + vid_hash + "; ffmpeg -y -framerate " + str(vs) + " -i img-" + "{:02d}".format(i) +
                       ".png video.mp4")
         # Concatenate up a singular sound file
         if sound is None:
@@ -102,5 +101,5 @@ def gen_video(content, vid_hash):
     # merged.output("cd slides/" + vid_hash + "/video2.mp4")
     # os.rename("slides/video2.mp4", "slides/video.mp4")
     # os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
-    os.system("cd slides/" + vid_hash + "; ffmpeg -i video.mp4 -i complete_reading.mp3 -c:v libx264 -c:a libvorbis -shortest output.mp4")
+    os.system("cd slides/" + vid_hash + "; ffmpeg -y -i video.mp4 -i complete_reading.mp3 -c:v libx264 -c:a libvorbis -shortest output.mp4")
     # Not sure we need this here since output will create the final video

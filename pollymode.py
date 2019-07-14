@@ -8,13 +8,12 @@ import boto3
 import os
 import string
 import sys
-#import subprocess
 from tempfile import gettempdir
 from contextlib import closing
 from botocore.exceptions import BotoCoreError, ClientError
 
 #Get access key from following
-from polly.access_key import *
+# from polly.access_key import *
 #Should contain:
 # ACCESS_KEY
 # SECRET_KEY
@@ -34,7 +33,6 @@ from polly.access_key import *
 #    aws_session_token=SESSION_TOKEN,
 #)
 
-
 #PollySynth class for polly,
 #Currently supports simple text
 
@@ -44,6 +42,14 @@ class PollySynth():
     notbillable = string.punctuation.join(string.whitespace)
     
     def __init__(self, voice = "Joanna"):
+        try:
+            ACCESS_KEY
+            SECRET_KEY
+        except NameError:
+            # Get from env
+            # TODO: Verify that stored
+            ACCESS_KEY = os.environ['POLLY_ACCESS_KEY']
+            SECRET_KEY = os.environ['POLLY_ACCESS_KEY']
         self.p = boto3.client(
         'polly',
         aws_access_key_id= ACCESS_KEY,
