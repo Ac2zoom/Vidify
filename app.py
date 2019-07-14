@@ -100,6 +100,7 @@ def gen_video(content, vid_hash):
     # merged = ffmpeg.concat(videoMP4, audioMP3, v=1, a=1)
     # merged.output("cd slides/" + vid_hash + "/video2.mp4")
     # os.rename("slides/video2.mp4", "slides/video.mp4")
+    # TODO: Revert back to equal framerate because more images
     # os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
     os.system("cd slides/" + vid_hash + "; ffmpeg -y -i video.mp4 -i complete_reading.mp3 -c:v libx264 -c:a libvorbis -shortest output.mp4")
     # Not sure we need this here since output will create the final video

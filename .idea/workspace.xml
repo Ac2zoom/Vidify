@@ -4,86 +4,6 @@
     <list default="true" id="4ab5d28f-6491-4a1f-988b-c2f36d019501" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pollymode.py" beforeDir="false" afterPath="$PROJECT_DIR$/pollymode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/img-01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/img-02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/img-03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/img-04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/img-05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/mylist.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x1c829e10a789e090/video2.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x20e44eaba32410e1/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x20e44eaba32410e1/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x20e44eaba32410e1/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x20e44eaba32410e1/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/img-01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/img-02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/img-03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/img-04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/img-05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x2aabf98f78e2653d/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3728371df010c985/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3728371df010c985/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3728371df010c985/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3728371df010c985/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3b6b28ab3c25dd3a/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3b6b28ab3c25dd3a/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3b6b28ab3c25dd3a/output.avi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3b6b28ab3c25dd3a/video.avi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3ef65d4f50be6063/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3ef65d4f50be6063/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3ef65d4f50be6063/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x3ef65d4f50be6063/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x5a8cb798f7e95314/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x5a8cb798f7e95314/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x5a8cb798f7e95314/output.avi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x5a8cb798f7e95314/video.avi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x750b14ac51f71d22/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x750b14ac51f71d22/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x750b14ac51f71d22/img-01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x750b14ac51f71d22/img-02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x750b14ac51f71d22/img-03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x750b14ac51f71d22/img-04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x750b14ac51f71d22/img-05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/-0x750b14ac51f71d22/video.avi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x1a7f4e5dbce134fd/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x1a7f4e5dbce134fd/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x1a7f4e5dbce134fd/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x1a7f4e5dbce134fd/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x23a0d3885037e7a3/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x23a0d3885037e7a3/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x23a0d3885037e7a3/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x23a0d3885037e7a3/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x30cc497570deb3c1/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x30cc497570deb3c1/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x30cc497570deb3c1/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x30cc497570deb3c1/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x3e9616e2e50f36f5/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x3e9616e2e50f36f5/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x3e9616e2e50f36f5/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x3e9616e2e50f36f5/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/img-01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/img-02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/img-03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/img-04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/img-05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x4454a724678a0433/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x586185e30e575f00/complete_reading.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x586185e30e575f00/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x586185e30e575f00/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0x586185e30e575f00/video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0xd8d2c3c7c53fa8a/complete_reading.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0xd8d2c3c7c53fa8a/img-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0xd8d2c3c7c53fa8a/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/slides/0xd8d2c3c7c53fa8a/video.mp4" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,8 +16,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="527">
+              <caret line="102" column="62" selection-start-line="102" selection-start-column="62" selection-end-line="102" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#60#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pollymode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
+            <state relative-caret-position="154">
+              <caret line="51" column="49" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
               <folding>
                 <element signature="e#98#110#0" expanded="true" />
               </folding>
@@ -158,6 +81,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="8" column="52" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/page1.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="83" column="81" selection-start-line="83" selection-start-column="77" selection-end-line="83" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -206,6 +138,8 @@
       <find>keyword</find>
       <find>make_slides</find>
       <find>ffmpeg</find>
+      <find>access</find>
+      <find>Mobirise</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -230,8 +164,8 @@
         <option value="$PROJECT_DIR$/summarize.py" />
         <option value="$PROJECT_DIR$/GetSlides.py" />
         <option value="$PROJECT_DIR$/templates/video.html" />
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/pollymode.py" />
       </list>
     </option>
@@ -314,12 +248,12 @@
       <option name="presentableId" value="Default" />
       <updated>1563044633892</updated>
       <workItem from="1563044639286" duration="2295000" />
-      <workItem from="1563051961077" duration="33388000" />
+      <workItem from="1563051961077" duration="33785000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35683000" />
+    <option name="totallyTimeSpent" value="36080000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="829" extended-state="6" />
@@ -469,13 +403,6 @@
     <entry file="file://$PROJECT_DIR$/sample.output">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/page1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="260" column="93" selection-start-line="260" selection-start-column="85" selection-end-line="260" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="607">
@@ -533,17 +460,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="102" column="62" selection-start-line="102" selection-start-column="62" selection-end-line="102" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pollymode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="51" column="49" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
+          <folding>
+            <element signature="e#98#110#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -554,13 +494,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pollymode.py">
+    <entry file="file://$PROJECT_DIR$/templates/page1.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
-          <folding>
-            <element signature="e#98#110#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="220">
+          <caret line="83" column="81" selection-start-line="83" selection-start-column="77" selection-end-line="83" selection-end-column="81" />
         </state>
       </provider>
     </entry>

@@ -49,7 +49,7 @@ class PollySynth():
             # Get from env
             # TODO: Verify that stored
             ACCESS_KEY = os.environ['POLLY_ACCESS_KEY']
-            SECRET_KEY = os.environ['POLLY_ACCESS_KEY']
+            SECRET_KEY = os.environ['POLLY_SECRET_KEY']
         self.p = boto3.client(
         'polly',
         aws_access_key_id= ACCESS_KEY,
