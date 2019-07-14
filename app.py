@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, send_file
 import GetSlides
 import os
+import pollymode
 from summarize import get_key_phrases
+from pydub import AudioSegment
 
 app = Flask(__name__)
 
@@ -47,4 +49,20 @@ def gen_video(content, vid_hash):
     vs = 0.2
     # size = (1280, 720)
     # TODO: Switch to using ffmpeg-python
+
+    for i in range(len(content[1]))
+
+    sound = new AudioSegment()
+
+    for file in os.listdir("slides/")
+        synth = new PollySynth()
+        speach = synth.mp3_speak("img" + i + ".mp3", content)
+
+        sound += speach
+
+    sound.export("complete_reading.mp3", format="mp3")
+    videoMP4 = ffmpeg.input("video.mp4")
+    audioMP3 = ffmpeg.input("complete_reading.mp3")
+    merged = ffmpeg.concat(videoMP4, audioMP3, v=1, a=1)
+    output  = ffmpeg.output(merged[0], merged[1], "merged.mp4")
     os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")

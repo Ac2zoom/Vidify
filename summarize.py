@@ -43,6 +43,3 @@ def get_key_phrases(url_or_file=FILE_NAME, words=None):
     phrases_list = comprehend_phrases(text_summ)
 
     return text_summ, phrases_list
-
-
-print(get_key_phrases())
