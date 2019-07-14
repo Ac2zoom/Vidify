@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, Response
 import cv2
 import GetSlides
-import vidtext
 import re
 import os
 import mimetypes
@@ -12,9 +11,11 @@ app = Flask(__name__)
 MB = 1 << 20
 BUFF_SIZE = 10 * MB
 
+
 def summary(data):
-	tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-	return tokenizer.tokenize(data)
+    tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+    return tokenizer.tokenize(data)
+
 
 @app.route('/')
 def hello_world():

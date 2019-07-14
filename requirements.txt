@@ -1,6 +1,5 @@
 google_images_download
 gunicorn
 flask
-vidtext/.
 nltk
 opencv-python
