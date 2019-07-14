@@ -70,7 +70,7 @@ def gen_video(content, vid_hash):
     # Loop through all sentences and create a recording for each one
     for i in range(len(sentence_list)):
         synth = pollymode.PollySynth()
-        speech = synth.mp3_speak("img" + str(i), sentence_list[i], None)
+        speech = str(synth.mp3_speak("img" + str(i), sentence_list[i], None))
         # TODO: Get time to play file
         speech_temp = AudioSegment.from_mp3(speech)
         time = speech_temp.duration_seconds
@@ -87,7 +87,7 @@ def gen_video(content, vid_hash):
     videoMP4 = ffmpeg.input("cd slides/" + vid_hash + "/video.mp4")
     audioMP3 = ffmpeg.input("complete_reading.mp3")
     merged = ffmpeg.concat(videoMP4, audioMP3, v=1, a=1)
-    output = ffmpeg.output(merged[0], merged[1], "video.mp4")
+    output = ffmpeg.output(merged[0], merged[1], "cd slides/" + vid_hash + "/video.mp4")
 
     # Not sure we need this here since output will create the final video
     # os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
