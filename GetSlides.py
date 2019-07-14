@@ -50,6 +50,7 @@ def overlay_text_on_image(keyword, description):
 
 
     img = Image.open("downloads/" + keyword + "/" + filename)
+    # img = img.convert('RGB')
 
     img = img.resize((1280, 720), resample=0)
     draw = ImageDraw.Draw(img)
@@ -58,7 +59,7 @@ def overlay_text_on_image(keyword, description):
     font = ImageFont.truetype(font_style, font_size)
 
     # text(position, text, color, font)
-    draw.text(font_placement, description, font_color, font=font)
+    draw.text(font_placement, description, fill=font_color, font=font)
     draw = ImageDraw.Draw(img)
     new_filename = "slides/" + keyword + ".png"
     img.save(new_filename)
