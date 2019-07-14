@@ -48,29 +48,26 @@ def overlay_text_on_image(keyword, description, vid_hash, count):
     @description:   Short sentence to overlay on the image (String)
     @return:        Saves the image to 'slides' folder
     """
-    # keyword = keyword + " no watermark"
-    for file in os.listdir("downloads/" + keyword):
-        filename = file
-    
+    filename = os.listdir("downloads/" + keyword)[0]
+
+    # truetype(font.ttf, font-size)
     font_style = "HelveticaNeue Medium.ttf"
-    font_size = 50
+    font_size = 30
     font_placement = (50, 50)
     font_color = (250, 250, 250)
     background_color = (0, 0, 0)
-    background_size = get_back_size(description)
-
     img = Image.open("downloads/" + keyword + "/" + filename)
-    # img = img.convert('RGB')
 
     img = img.resize((1280, 720), resample=0)
     draw = ImageDraw.Draw(img)
-
-    # truetype(font.ttf, font-size)
     font = ImageFont.truetype(font_style, font_size)
+    
+    description = insert_newline(description, font_size)
+    background_size = get_back_size(description, font_size, draw, font)
+    draw.rectangle(((25,35), background_size), fill='black')
 
     # text(position, text, color, font)
-    draw.rectangle(((25,35), background_size), fill='black')
-    draw.text(font_placement, description, fill=font_color, font=font)
+    draw.text(font_placement, description, font_color, font=font)
     draw = ImageDraw.Draw(img)
     # If no vid_hash directory, create one
     dir_path = "slides/" + vid_hash
@@ -80,22 +77,25 @@ def overlay_text_on_image(keyword, description, vid_hash, count):
         os.mkdir(dir_path)
     new_filename = dir_path + "/img-" + "{:02d}".format(count) + ".png"
     img.save(new_filename)
+
     return new_filename
 
-def insert_newline(description):
-    
-    return new_description
-
-def get_back_size(description):
-    line_count = 125
-    lines = description.split('\n')
-    length = len(max(lines, key=len))
-    for char in description:
-        if char == '\n':
-            line_count += 60
-            
-    # length = len(description)
-    if length == 0:
-        return 25, 35
+def get_back_size(description, font_size, draw, font):
+    length = draw.textsize(description, font)
+    return_length = (length[0] + 80, length[1] + 70)
+    if len(description) == 0:
+        return (25, 35)
     else:
-        return length*29, line_count
+        return return_length
+
+def insert_newline(description, font_size):
+    char_count = 0
+    words = description.split(' ')
+    for i in range(len(words)):
+        char_count += len(words[i]) + 1
+        if (char_count * (int)(font_size * (0.5))) > 1200:
+            words.insert(i, '\n')
+            i += 1
+            char_count = 0
+    
+    return ' '.join(words)
