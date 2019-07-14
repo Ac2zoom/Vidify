@@ -1,6 +1,5 @@
 from google_images_download import google_images_download
 from PIL import ImageFont, Image, ImageDraw
-import cv2
 import os
 
 
@@ -13,11 +12,13 @@ def make_slides(description_map, vid_hash):
     @return:            Saves resulting slides to 'slides' folder
     """
     image_arr = []
+    count = 0
     for keyword in description_map:
         get_image(keyword)
         description = description_map[keyword]
-        image = overlay_text_on_image(keyword, description, vid_hash)
+        image = overlay_text_on_image(keyword, description, vid_hash, count)
         image_arr.append(image)
+        count += 1
     return image_arr
 
 
@@ -40,7 +41,7 @@ def get_image(keywords):
     return response.download(arguments)
 
 
-def overlay_text_on_image(keyword, description, vid_hash):
+def overlay_text_on_image(keyword, description, vid_hash, count):
     """
     Finds the image associated with that keyword and overlays the description over the top of it
     @keyword:       The title of the image that needs a description (String)
@@ -75,9 +76,9 @@ def overlay_text_on_image(keyword, description, vid_hash):
     dir_path = "slides/" + vid_hash
     if not os.path.isdir(dir_path):
         os.mkdir(dir_path)
-    new_filename = dir_path + "/" + keyword + ".png"
+    new_filename = dir_path + "/img-" + "{:02d}".format(count) + ".png"
     img.save(new_filename)
-    return cv2.imread(new_filename)
+    return new_filename
 
 
 def get_back_size(description):
