@@ -1,21 +1,20 @@
-import os
 import json
 import requests
-
 from gensim.summarization.summarizer import summarize
-import pandas as pd
-
 import boto3
 
 comprehend = boto3.client(service_name='comprehend', region_name='us-west-2')
 
 FILE_NAME = "/home/rock/data/angelhack_vidify/sample.txt"
 
-def get_key_phrases(url_or_file=FILE_NAME):
+
+def get_key_phrases(url_or_file=FILE_NAME, words=None):
     """
     Returns a tuple having (gensim_summarization, comprehend_phrases)
     """
-    if "http" in url_or_file:
+    if url_or_file is None:
+        text = words
+    elif "http" in url_or_file:
         text = requests.get(url_or_file).text
     else:
         file = FILE_NAME
@@ -43,6 +42,7 @@ def get_key_phrases(url_or_file=FILE_NAME):
     # get the key phrases from the gensim summarization using Amazon Comprehend
     phrases_list = comprehend_phrases(text_summ)
 
-    return (text_summ, phrases_list)
+    return text_summ, phrases_list
+
 
 print(get_key_phrases())
