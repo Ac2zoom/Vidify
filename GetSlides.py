@@ -54,6 +54,8 @@ def overlay_text_on_image(keyword, description, vid_hash, count):
     font_style = "HelveticaNeue Medium.ttf"
     font_size = 30
     font_placement = (50, 50)
+    
+    # (R, G, B)
     font_color = (250, 250, 250)
     background_color = (0, 0, 0)
     img = Image.open("downloads/" + keyword + "/" + filename)
@@ -64,6 +66,8 @@ def overlay_text_on_image(keyword, description, vid_hash, count):
     
     description = insert_newline(description, font_size)
     background_size = get_back_size(description, font_size, draw, font)
+
+    # fill = background color
     draw.rectangle(((25,35), background_size), fill='black')
 
     # text(position, text, color, font)
