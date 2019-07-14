@@ -38,15 +38,24 @@ def get_image(keywords):
     "print_urls":True}
     paths = response.download(arguments)
 
+
 def overlay_text_on_image(keyword, description):
+    """
+    Finds the image associated with that keyword and overlays the description over the top of it
+    @keyword:       The title of the image that needs a description (String)
+    @description:   Short sentence to overlay on the image (String)
+    @return:        Saves the image to 'slides' folder
+    """
     # keyword = keyword + " no watermark"
     for file in os.listdir("downloads/" + keyword):
         filename = file
     
-    font_style = "FancyHeartScript.ttf"
-    font_size = 150
+    font_style = "HelveticaNeue Medium.ttf"
+    font_size = 50
     font_placement = (50, 50)
-    font_color = (255, 150, 150)
+    font_color = (250, 250, 250)
+    background_color = (0, 0, 0)
+    background_size = get_back_size(description)
 
 
     img = Image.open("downloads/" + keyword + "/" + filename)
@@ -59,8 +68,23 @@ def overlay_text_on_image(keyword, description):
     font = ImageFont.truetype(font_style, font_size)
 
     # text(position, text, color, font)
+    draw.rectangle(((25,35), background_size), fill='black')
     draw.text(font_placement, description, fill=font_color, font=font)
     draw = ImageDraw.Draw(img)
     new_filename = "slides/" + keyword + ".png"
     img.save(new_filename)
     return cv2.imread(new_filename)
+
+def get_back_size(description):
+    line_count = 125
+    lines = description.split('\n')
+    length = len(max(lines, key=len))
+    for char in description:
+        if char == '\n':
+            line_count += 60
+            
+    # length = len(description)
+    if length == 0:
+        return (25, 35)
+    else:
+        return (length*29, line_count)
