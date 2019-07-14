@@ -5,3 +5,5 @@ requests
 gensim
 boto3
 image
+pydub
+ffmpeg-python
