@@ -4,6 +4,7 @@ from flask import request
 from flask import send_file
 from google_images_download import google_images_download
 from PIL import ImageFont, Image, ImageDraw
+import cv2
 import os
 import vidtext
 from flask.json import jsonify
@@ -32,7 +33,6 @@ def vidify():
     return send_file("slides/" + content[0] + " no watermark.jpg")
 
 
-# def make_slides(description_map):
 """
 Loops through all the given keywords and generates slides by 
 finding images for the keywords and overlaying their descriptions onto the images. 
@@ -40,6 +40,14 @@ Saves the resulting images in the 'slides' folder
 @description_map:   a HashMap matching the keyword (String) with its description (String)
 @return:            Saves resulting slides to 'slides' folder
 """
+def make_slides(description_map):
+    image_arr = []
+    for keyword in description_map:
+        get_image(keyword)
+        description = description_map[keyword]
+        image = overlay_text_on_image(keyword, description)
+        image_arr.append(image)
+    return image_arr
 
 
 def get_image(keywords):
@@ -55,7 +63,7 @@ def get_image(keywords):
         "format": "jpg",
         "aspect_ratio": "wide",
         "usage_rights": "labeled-for-reuse-with-modifications",
-        "limit": 5,
+        "limit": 1,
         "size": "large",
         "print_urls": True}
     paths = response.download(arguments)
@@ -69,21 +77,26 @@ def overlay_text_on_image(keyword, description):
     @description:   Short sentence to overlay on the image (String)
     @return:        Saves the image to 'slides' folder
     """
-    # for file in os.listdir("downloads\\" + keyword):
-    #     if file.endswith(".jpg"):
     keyword = keyword + " no watermark"
     for file in os.listdir("downloads/" + keyword):
         filename = file
-        
+    
+    font_style = "FancyHeartScript.ttf"
+    font_size = 150
+    font_placement = (50, 50)
+    font_color = (255, 150, 150)
+
     img = Image.open("downloads/" + keyword + "/" + filename)
 
+    img = img.resize((1280, 720), resample=0)
     draw = ImageDraw.Draw(img)
 
     # truetype(font.ttf, font-size)
-    font = ImageFont.truetype("FancyHeartScript.ttf", 150)
+    font = ImageFont.truetype(font_style, font_size)
 
     # text(position, text, color, font)
-    draw.text((50, 50), description, (255, 100, 100), font=font)
+    draw.text(font_placement, description, font_color, font=font)
     draw = ImageDraw.Draw(img)
-    img.save("slides/" + keyword + ".jpg")
+    img.save("slides/" + keyword + ".png")
+    return cv2.imread(filename)
 
