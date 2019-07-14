@@ -105,7 +105,7 @@ def insert_newline(description, font_size):
     words = ''.join(description).split(' ')
     for i in range(len(words)):
         char_count += len(words[i]) + 1
-        if (char_count * int(font_size * 0.5)) > 1200:
+        if (char_count * int(font_size * 0.5)) > 1100:
             words.insert(i, '\n')
             i += 1
             char_count = 0

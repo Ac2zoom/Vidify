@@ -5,6 +5,8 @@ import pollymode
 from summarize import get_key_phrases
 from pydub import AudioSegment
 import ffmpeg
+import os.path
+from os import path
 
 app = Flask(__name__)
 
@@ -44,7 +46,7 @@ def vidify():
 
 @app.route("/video/<vid_hash>", methods=['GET', 'POST'])
 def video(vid_hash):
-    return send_file('slides/' + vid_hash + '/video.mp4')
+    return send_file('slides/' + vid_hash + '/output.mp4')
 
 
 def gen_video(content, vid_hash):
@@ -68,33 +70,39 @@ def gen_video(content, vid_hash):
     # Create empty video file to build up video
     if not os.path.isdir("slides/" + vid_hash):
         os.mkdir("slides/" + vid_hash)
-    open("slides/" + vid_hash + '/video.mp4', 'a').close()
 
     # Loop through all sentences and create a recording for each one
-    for i in range(len(sentence_list)):
+    for i in range(min((5, len(sentence_list)))):
         synth = pollymode.PollySynth()
         speech = str(synth.mp3_speak("img" + str(i), sentence_list[i], None))
         # TODO: Get time to play file
         speech_temp = AudioSegment.from_mp3(speech)
-        time = speech_temp.duration_seconds
-        vs = 1 / time
-
-        os.system("cd slides/" + vid_hash + "; ffmpeg - framerate " + str(vs) + " -i img-" + "{:02d}".format(i) +
-                  ".png video2.mp4")
-        os.system("cd slides/" + vid_hash + "; ffmpeg -i “concat:video.mp4|video2.mp4” video.mp4")
+        # time = speech_temp.duration_seconds
+        # # vs = 1 / time
+        # vs = .1
+        # if path.exists("slides/video.mp4"):
+        #     os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-" + "{:02d}".format(i) +
+        #               ".png video2.mp4")
+        #     os.system("cd slides/" + vid_hash +
+        #               "; printf \"file 'video.mp4'\nfile 'video2.mp4'\" > mylist.txt; ffmpeg -f concat -safe 0 -i mylist.txt -c copy video.mp4")
+        # else:
+        #     os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-" + "{:02d}".format(i) +
+        #               ".png video.avi")
         # Concatenate up a singular sound file
         if sound is None:
             sound = speech_temp
+            break
         else:
             sound += speech_temp
     # Build a singular sound file
-    sound.export("complete_reading.mp3", format="mp3")
+    sound.export("slides/" + vid_hash + "/complete_reading.wav", format="wav")
 
     # Merge sound and video file
-    videoMP4 = ffmpeg.input("cd slides/" + vid_hash + "/video.mp4")
-    audioMP3 = ffmpeg.input("complete_reading.mp3")
-    merged = ffmpeg.concat(videoMP4, audioMP3, v=1, a=1)
-    output = ffmpeg.output(merged[0], merged[1], "cd slides/" + vid_hash + "/video.mp4")
-
+    # videoMP4 = ffmpeg.input("cd slides/" + vid_hash + "/video.mp4")
+    # audioMP3 = ffmpeg.input("complete_reading.mp3")
+    # merged = ffmpeg.concat(videoMP4, audioMP3, v=1, a=1)
+    # merged.output("cd slides/" + vid_hash + "/video2.mp4")
+    # os.rename("slides/video2.mp4", "slides/video.mp4")
+    os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
+    # os.system("cd slides/" + vid_hash + "; ffmpeg -i video.mp4 -i complete_reading.wav -c copy output.mp4")
     # Not sure we need this here since output will create the final video
-    # os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
