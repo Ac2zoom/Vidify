@@ -1,104 +1,160 @@
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<style>
-    @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+<!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>-->
+<!--<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>-->
+<!--&lt;!&ndash;<style>&ndash;&gt;-->
+    <!--&lt;!&ndash;@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);&ndash;&gt;-->
 
-.form-control{
-    background: transparent;
-}
-form {
-	width: 320px;
-	margin: 20px;
-}
-form > div {
-	position: relative;
-	overflow: hidden;
-}
-form input, form textarea {
-	width: 100%;
-	border: 2px solid gray;
-	background: none;
-	position: relative;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	padding: 8px 12px;
-	outline: 0;
-}
-form input:valid, form textarea:valid {
-	background: white;
-}
-form input:focus, form textarea:focus {
-	border-color: #357EBD;
-}
-form input:focus + label, form textarea:focus + label {
-	background: #357EBD;
-	color: white;
-	font-size: 70%;
-	padding: 1px 6px;
-	z-index: 2;
-	text-transform: uppercase;
-}
-form label {
-	-webkit-transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right 0.2s, left 0.2s;
-	transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right 0.2s, left 0.2s;
-	position: absolute;
-	color: #999;
-	padding: 7px 6px;
-	font-weight: normal;
-}
-form textarea {
-	display: block;
-	resize: vertical;
-}
-form.go-bottom input, form.go-bottom textarea {
-	padding: 12px 12px 12px 12px;
-}
-form.go-bottom label {
-	top: 0;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-}
-form.go-bottom input:focus, form.go-bottom textarea:focus {
-	padding: 4px 6px 20px 6px;
-}
-form.go-bottom input:focus + label, form.go-bottom textarea:focus + label {
-	top: 100%;
-	margin-top: -16px;
-}
-form.go-right label {
-	border-radius: 0 5px 5px 0;
-	height: 100%;
-	top: 0;
-	right: 100%;
-	width: 100%;
-	margin-right: -100%;
-}
-form.go-right input:focus + label, form.go-right textarea:focus + label {
-	right: 0;
-	margin-right: 0;
-	width: 40%;
-	padding-top: 5px;
-}
-</style>
+<!--&lt;!&ndash;.form-control{&ndash;&gt;-->
+    <!--&lt;!&ndash;background: transparent;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form {&ndash;&gt;-->
+	<!--&lt;!&ndash;width: 320px;&ndash;&gt;-->
+	<!--&lt;!&ndash;margin: 20px;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form > div {&ndash;&gt;-->
+	<!--&lt;!&ndash;position: relative;&ndash;&gt;-->
+	<!--&lt;!&ndash;overflow: hidden;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form input, form textarea {&ndash;&gt;-->
+	<!--&lt;!&ndash;width: 100%;&ndash;&gt;-->
+	<!--&lt;!&ndash;border: 2px solid gray;&ndash;&gt;-->
+	<!--&lt;!&ndash;background: none;&ndash;&gt;-->
+	<!--&lt;!&ndash;position: relative;&ndash;&gt;-->
+	<!--&lt;!&ndash;top: 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;left: 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;z-index: 1;&ndash;&gt;-->
+	<!--&lt;!&ndash;padding: 8px 12px;&ndash;&gt;-->
+	<!--&lt;!&ndash;outline: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form input:valid, form textarea:valid {&ndash;&gt;-->
+	<!--&lt;!&ndash;background: white;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form input:focus, form textarea:focus {&ndash;&gt;-->
+	<!--&lt;!&ndash;border-color: #357EBD;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form input:focus + label, form textarea:focus + label {&ndash;&gt;-->
+	<!--&lt;!&ndash;background: #357EBD;&ndash;&gt;-->
+	<!--&lt;!&ndash;color: white;&ndash;&gt;-->
+	<!--&lt;!&ndash;font-size: 70%;&ndash;&gt;-->
+	<!--&lt;!&ndash;padding: 1px 6px;&ndash;&gt;-->
+	<!--&lt;!&ndash;z-index: 2;&ndash;&gt;-->
+	<!--&lt;!&ndash;text-transform: uppercase;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form label {&ndash;&gt;-->
+	<!--&lt;!&ndash; -webkit-transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right 0.2s, left 0.2s;&ndash;&gt;-->
+	<!--&lt;!&ndash;transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right 0.2s, left 0.2s;&ndash;&gt;-->
+	<!--&lt;!&ndash;position: absolute;&ndash;&gt;-->
+	<!--&lt;!&ndash;color: #999;&ndash;&gt;-->
+	<!--&lt;!&ndash;padding: 7px 6px;&ndash;&gt;-->
+	<!--&lt;!&ndash;font-weight: normal;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form textarea {&ndash;&gt;-->
+	<!--&lt;!&ndash;display: block;&ndash;&gt;-->
+	<!--&lt;!&ndash;resize: vertical;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form.go-bottom input, form.go-bottom textarea {&ndash;&gt;-->
+	<!--&lt;!&ndash;padding: 12px 12px 12px 12px;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form.go-bottom label {&ndash;&gt;-->
+	<!--&lt;!&ndash;top: 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;bottom: 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;left: 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;width: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form.go-bottom input:focus, form.go-bottom textarea:focus {&ndash;&gt;-->
+	<!--&lt;!&ndash;padding: 4px 6px 20px 6px;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form.go-bottom input:focus + label, form.go-bottom textarea:focus + label {&ndash;&gt;-->
+	<!--&lt;!&ndash;top: 100%;&ndash;&gt;-->
+	<!--&lt;!&ndash;margin-top: -16px;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form.go-right label {&ndash;&gt;-->
+	<!--&lt;!&ndash;border-radius: 0 5px 5px 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;height: 100%;&ndash;&gt;-->
+	<!--&lt;!&ndash;top: 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;right: 100%;&ndash;&gt;-->
+	<!--&lt;!&ndash;width: 100%;&ndash;&gt;-->
+	<!--&lt;!&ndash;margin-right: -100%;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;form.go-right input:focus + label, form.go-right textarea:focus + label {&ndash;&gt;-->
+	<!--&lt;!&ndash;right: 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;margin-right: 0;&ndash;&gt;-->
+	<!--&lt;!&ndash;width: 40%;&ndash;&gt;-->
+	<!--&lt;!&ndash;padding-top: 5px;&ndash;&gt;-->
+<!--&lt;!&ndash;}&ndash;&gt;-->
+<!--&lt;!&ndash;</style>&ndash;&gt;-->
 <!------ Include the above in your HEAD tag ---------->
 
+<!--<div class="container">-->
+    <!--<div class="row">-->
+		<!--<form role="form" class="col-md-9 go-right" action="/vidify" method ="POST">-->
+			<!--<h2>Vidify.ml</h2>-->
+            <!--<p>Enter text to summarize and turn into a video abstract!</p>-->
+			<!--<div class="form-group">-->
+			<!--<input id="source" name="source" type="text" class="form-control" required>-->
+			<!--<label for="source">Source URL</label>-->
+			<!--</div>-->
+		<!--<div class="form-group">-->
+			<!--<textarea id="text" name="text" class="form-control" required></textarea>-->
+			<!--<label for="text">Text</label>-->
+		<!--</div>-->
+        <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+		<!--</form>-->
+	<!--</div>-->
+<!--</div>-->
+<!DOCTYPE html>
+<html >
+<head>
+  <!-- Site made with Mobirise Website Builder v4.8.7, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v4.8.7, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo2.png" type="image/x-icon">
+  <meta name="description" content="Web Site Maker Description">
+  <title>Vidify.ML</title>
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/animatecss/animate.min.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+
+
+</head>
+
+<body>
 <div class="container">
-    <div class="row">
-		<form role="form" class="col-md-9 go-right" action="/vidify" method ="POST">
-			<h2>Vidify.ml</h2>
-            <p>Enter text to summarize and turn into a video abstract!</p>
-			<div class="form-group">
-			<input id="source" name="source" type="text" class="form-control" required>
-			<label for="source">Source URL</label>
-			</div>
-		<div class="form-group">
-			<textarea id="text" name="text" class="form-control" required></textarea>
-			<label for="text">Text</label>
-		</div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-	</div>
-</div>
+        <div class="row justify-content-center">
+            <div class="media-container-column col-lg-8" data-form-type="formoid">
+                    <div data-form-alert="" hidden="">
+                        Thanks for filling out the form!
+                    </div>
+
+                    <form class="mbr-form" action="/vidify" method="post" data-form-title="Mobirise Form"><input type="hidden" name="email" data-form-email="true" value="1wKfFlAR+J0ytUZyq1N3+tOVZ+tiJan0r0zzkj/Qa00jx21i2FUh8dJAuSYuxuB9U5I7YhAzn1Zgac0Td5u/SR8mtGqh7MNTd5aEXdQ+vqTabtsh7R7VfWD0scvlxyLF">
+                        <div class="row row-sm-offset">
+                            <div class="col-md-4 multi-horizontal" data-for="source">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="source-form1-8">Source URL</label>
+                                    <input type="text" class="form-control" name="source" data-form-field="Source" required="" id="source-form1-8">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" data-for="message">
+                            <label class="form-control-label mbr-fonts-style display-7" for="message-form1-8">Text</label>
+                            <textarea type="text" class="form-control" name="text" rows="7" data-form-field="Text" id="message-form1-8"></textarea>
+                        </div>
+
+                        <span class="input-group-btn">
+                            <button href="" type="submit" class="btn btn-primary btn-form display-4">SEND FORM</button>
+                        </span>
+                    </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
