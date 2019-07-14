@@ -1,18 +1,12 @@
 from flask import Flask, render_template, request, send_file
 import GetSlides
 import os
-import nltk.data
+from summarize import get_key_phrases
 
 app = Flask(__name__)
 
 MB = 1 << 20
 BUFF_SIZE = 10 * MB
-
-
-# TODO: Replace with call to Rock's work (summarize.py)
-def summary(data):
-    tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-    return tokenizer.tokenize(data)
 
 
 @app.route('/')
@@ -26,9 +20,9 @@ def index():
 def vidify():
     source_url = request.args.get('source')
     text = request.args.get('text')
-    # TODO: Summarize text (use Rock's functions)
-    content = summary(text)  # Return List
-    vid_hash = hex(hash(''.join(content)))
+    # Summarize text
+    content = get_key_phrases(text)  # Return Tuple of Gensim Summarization and Comprehend_Phrases
+    vid_hash = hex(hash(''.join(content.values())))
     gen_video(content, vid_hash)
     return render_template("video.html", source=source_url, video="/video/" + vid_hash)
 
@@ -39,8 +33,10 @@ def video(vid_hash):
 
 
 def gen_video(content, vid_hash):
-    # Form description_map (same key/value for now)
-    description_map = {sentence: sentence for sentence in content}
+    # Form description_map from summarize tuple
+    sentence_list = content[0].split(".")
+    # TODO: Add asserts/checks here to prevent errors
+    description_map = {sentence_list[i]: content[1][i] for i in range(len(content[1]))}
     # Call make_slides
     # TODO: cv2 references aren't necessary anymore
     img_array = GetSlides.make_slides(description_map, vid_hash)
