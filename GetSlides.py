@@ -1,10 +1,9 @@
 from google_images_download import google_images_download
 from PIL import ImageFont, Image, ImageDraw
-import cv2
 import os
 
 
-def make_slides(description_map):
+def make_slides(description_map, vid_hash):
     """
     Loops through all the given keywords and generates slides by
     finding images for the keywords and overlaying their descriptions onto the images.
@@ -13,11 +12,13 @@ def make_slides(description_map):
     @return:            Saves resulting slides to 'slides' folder
     """
     image_arr = []
+    count = 0
     for keyword in description_map:
         get_image(keyword)
         description = description_map[keyword]
-        image = overlay_text_on_image(keyword, description)
+        image = overlay_text_on_image(keyword, description, vid_hash, count)
         image_arr.append(image)
+        count += 1
     return image_arr
 
 
@@ -40,7 +41,7 @@ def get_image(keywords):
     return response.download(arguments)
 
 
-def overlay_text_on_image(keyword, description):
+def overlay_text_on_image(keyword, description, vid_hash, count):
     """
     Finds the image associated with that keyword and overlays the description over the top of it
     @keyword:       The title of the image that needs a description (String)
@@ -71,9 +72,15 @@ def overlay_text_on_image(keyword, description):
     draw.rectangle(((25,35), background_size), fill='black')
     draw.text(font_placement, description, fill=font_color, font=font)
     draw = ImageDraw.Draw(img)
-    new_filename = "slides/" + keyword + ".png"
+    # If no vid_hash directory, create one
+    dir_path = "slides/" + vid_hash
+    if not os.path.isdir("slides"):
+        os.mkdir("slides")
+    if not os.path.isdir(dir_path):
+        os.mkdir(dir_path)
+    new_filename = dir_path + "/img-" + "{:02d}".format(count) + ".png"
     img.save(new_filename)
-    return cv2.imread(new_filename)
+    return new_filename
 
 def insert_newline(description):
     

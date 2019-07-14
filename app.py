@@ -1,9 +1,6 @@
-from flask import Flask, render_template, request, Response, send_file
-import cv2
+from flask import Flask, render_template, request, send_file
 import GetSlides
-import re
 import os
-import mimetypes
 import nltk.data
 
 app = Flask(__name__)
@@ -12,6 +9,7 @@ MB = 1 << 20
 BUFF_SIZE = 10 * MB
 
 
+# TODO: Replace with call to Rock's work (summarize.py)
 def summary(data):
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
     return tokenizer.tokenize(data)
@@ -30,26 +28,27 @@ def vidify():
     text = request.args.get('text')
     # TODO: Summarize text (use Rock's functions)
     content = summary(text)  # Return List
-    gen_video(content)
-    return render_template("video.html", source=source_url, video="/video/" + hex(hash(''.join(content))))
+    vid_hash = hex(hash(''.join(content)))
+    gen_video(content, vid_hash)
+    return render_template("video.html", source=source_url, video="/video/" + vid_hash)
 
 
 @app.route("/video/<vid_hash>", methods=['GET', 'POST'])
 def video(vid_hash):
-    return send_file('videos/' + vid_hash + '.mp4')
+    return send_file('slides/' + vid_hash + '/video.mp4')
 
 
-def gen_video(content):
+def gen_video(content, vid_hash):
     # Form description_map (same key/value for now)
     description_map = {sentence: sentence for sentence in content}
     # Call make_slides
-    img_array = GetSlides.make_slides(description_map)
+    # TODO: cv2 references aren't necessary anymore
+    img_array = GetSlides.make_slides(description_map, vid_hash)
     # Turn image_arr into video
     # TODO: Figure out how to append audio from Jasper's work
-    # TODO: Accept vs, size, and font from user
-    vs = 0.1
-    size = (1280, 720)
-    out = cv2.VideoWriter('videos/' + hex(hash(''.join(content))) + '.mp4', cv2.VideoWriter_fourcc(*'H264'), vs, size)
-    for i in range(len(img_array)):
-        out.write(img_array[i])
-    out.release()
+    # ffmpeg -i video.mp4 -i audio.mp3 -codec copy -shortest output.mp4
+    # TODO: Accept vs, size, intro, and font from user
+    vs = 0.2
+    # size = (1280, 720)
+    # TODO: Switch to using ffmpeg-python
+    os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
