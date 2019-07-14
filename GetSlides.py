@@ -74,12 +74,12 @@ def overlay_text_on_image(keyword, description, vid_hash, count):
     draw.text(font_placement, description, font_color, font=font)
     draw = ImageDraw.Draw(img)
     # If no vid_hash directory, create one
-    dir_path = "slides/" + vid_hash
+    dir_path = "slides\\" + vid_hash
     if not os.path.isdir("slides"):
         os.mkdir("slides")
     if not os.path.isdir(dir_path):
         os.mkdir(dir_path)
-    new_filename = dir_path + "/img-" + "{:02d}".format(count) + ".png"
+    new_filename = dir_path + "\\img-" + "{:02d}".format(count) + ".png"
     img.save(new_filename)
 
     return new_filename
@@ -89,7 +89,7 @@ def get_back_size(description, font_size, draw, font):
     length = draw.textsize(description, font)
     return_length = (length[0] + 80, length[1] + 70)
     if len(description) == 0:
-        return (25, 35)
+        return 25, 35
     else:
         return return_length
 
