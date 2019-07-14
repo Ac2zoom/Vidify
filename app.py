@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, send_file
 import GetSlides
 import os
+import pollymode
 from summarize import get_key_phrases
+from pydub import AudioSegment
 
 app = Flask(__name__)
 
@@ -11,6 +13,16 @@ BUFF_SIZE = 10 * MB
 
 @app.route('/')
 def index():
+    return render_template('page1.html')
+
+
+@app.route('/assets/<path:subpath>')
+def asset(subpath):
+    return send_file('assets/' + subpath)
+
+
+@app.route('/demo')
+def demo():
     # Form for source and text
     return render_template('index.html')
 
@@ -22,7 +34,8 @@ def vidify():
     text = request.args.get('text')
     # Summarize text
     content = get_key_phrases(text)  # Return Tuple of Gensim Summarization and Comprehend_Phrases
-    vid_hash = hex(hash(''.join(content.values())))
+    # TODO: Verify that this works given that each index of content[1] is a list
+    vid_hash = hex(hash(''.join(content[1])))
     gen_video(content, vid_hash)
     return render_template("video.html", source=source_url, video="/video/" + vid_hash)
 
@@ -47,4 +60,27 @@ def gen_video(content, vid_hash):
     vs = 0.2
     # size = (1280, 720)
     # TODO: Switch to using ffmpeg-python
+    
+    # Create file to build up reading sound
+    sound = new AudioSegment()
+
+    # Loop through all sentences and create a recording for each one
+    for i in range(len(sentence_list))
+        synth = new PollySynth()
+        speach = synth.mp3_speak("img" + i + ".mp3", sentence_list[i], None)
+        # TODO: Get time to play file
+        # TODO: Make individual slide videos
+
+        # Concatenate up a singular sound file
+        sound += speach
+    # Build a singular sound file
+    sound.export("complete_reading.mp3", format="mp3")
+
+    # Merge sound and video file
+    videoMP4 = ffmpeg.input("video.mp4")
+    audioMP3 = ffmpeg.input("complete_reading.mp3")
+    merged = ffmpeg.concat(videoMP4, audioMP3, v=1, a=1)
+    output  = ffmpeg.output(merged[0], merged[1], "video.mp4")
+
+    # Not sure we need this here since output will create the final video
     os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
