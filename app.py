@@ -5,12 +5,16 @@ import vidtext
 import re
 import os
 import mimetypes
+import nltk.data
 
 app = Flask(__name__)
 
 MB = 1 << 20
 BUFF_SIZE = 10 * MB
 
+def summary(data):
+	tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+	return tokenizer.tokenize(data)
 
 @app.route('/')
 def hello_world():
@@ -24,7 +28,7 @@ def vidify():
     source_url = request.args.get('source')
     text = request.args.get('text')
     # TODO: Summarize text (use Rock's functions)
-    content = vidtext.summary(text)  # Return List
+    content = summary(text)  # Return List
     gen_video(content)
     return render_template("video.html", source=source_url, video="/video/" + hex(hash(''.join(content))))
 
