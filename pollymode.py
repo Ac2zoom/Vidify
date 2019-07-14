@@ -60,32 +60,50 @@ class PollySynth():
         'Zhiyu']
         self.Voice = voice
         
+    #Return a list of the available voices
     def list_voices(self):
         return self.voices
-                
     
     # For the simple instance of Mp3 generation for less than 6000 total characters
     # and less than 3000 billable characters, (Assuming this means alphanumeric)
     # produce a voice text and return the file path to that object
-    def mp3_speak(self, filename, text: str, Voice, type_="text"):
-        # Set initial attributes
-        if Voice is None:
-            Voice = self.Voice
-        
-        # Create a suitable filename
-        filename = filename + hex(hash(text)) + "-" + Voice + ".mp3"
-        
-        #We want to make sure that the max character limit is not exceeded per API 
+    def words_billable(self, text: str):
         input_ = str(text)
         input_length = len(input_.strip(self.notbillable))
         if input_length >= 3000:
             print("Warning Characters >= 3000")
         if input_length >= 6000:
             print("Billable Characters >= 6000 \n Quitting!!")
-            sys.exit(-1)
+            sys.exit(-1),
+    
+    def keyword_time(self, text: str, keywords: list, Voice, type_="text"):
+        if Voice is None:
+            Voice = self.Voice        
+        
+        self.words_billable(text)
+        
+        try:
+            # Request speech digest
+            response = self.p.synthesize_speech(Text=text, OutputFormat="json",
+                                           VoiceId=Voice, SpeechMarkTypes=keywords)
+            return (response)
+        except (BotoCoreError, ClientError) as error:
+            print(error)
+            
+    def mp3_speak(self, prefix, text: str, Voice=None, type_="text"):
+        # Set initial attributes
+        if Voice is None:
+            Voice = self.Voice
+        
+        # Create a suitable filename
+        filename = prefix + hex(hash(text)) + "-" + Voice + ".mp3"
+        
+        #We want to make sure that the max character limit is not exceeded per API 
+        self.words_billable(text)
+        
         try:
             # Request speech synthesis
-            response = p.synthesize_speech(Text=text, OutputFormat="mp3", VoiceId=Voice, TextType= type_)
+            response = self.p.synthesize_speech(Text=text, OutputFormat="mp3", VoiceId=Voice, TextType= type_)
         except (BotoCoreError, ClientError) as error:
             # The service returned an error, exit gracefully
             print(error)
