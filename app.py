@@ -64,9 +64,11 @@ def gen_video(content, vid_hash):
     # TODO: Switch to using ffmpeg-python
     
     # Create file to build up reading sound
-    sound = AudioSegment()
+    sound = None
     # Create empty video file to build up video
-    open("cd slides/" + vid_hash + 'video.mp4', 'a').close()
+    if not os.path.isdir("slides/" + vid_hash):
+        os.mkdir("slides/" + vid_hash)
+    open("slides/" + vid_hash + '/video.mp4', 'a').close()
 
     # Loop through all sentences and create a recording for each one
     for i in range(len(sentence_list)):
@@ -77,10 +79,14 @@ def gen_video(content, vid_hash):
         time = speech_temp.duration_seconds
         vs = 1 / time
 
-        os.system("cd slides/" + vid_hash + "; ffmpeg - framerate " + str(vs) + " -i img-" + str(i) + ".png video2.mp4")
-        os.system("cd slides/" + vid_hash + ";ffmpeg -i “concat:video.mp4|video2.mp4” video.mp4")
+        os.system("cd slides/" + vid_hash + "; ffmpeg - framerate " + str(vs) + " -i img-" + "{:02d}".format(i) +
+                  ".png video2.mp4")
+        os.system("cd slides/" + vid_hash + "; ffmpeg -i “concat:video.mp4|video2.mp4” video.mp4")
         # Concatenate up a singular sound file
-        sound += speech
+        if sound is None:
+            sound = speech_temp
+        else:
+            sound += speech_temp
     # Build a singular sound file
     sound.export("complete_reading.mp3", format="mp3")
 

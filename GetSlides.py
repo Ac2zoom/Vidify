@@ -80,12 +80,12 @@ def overlay_text_on_image(filename, description, vid_hash, count):
     draw.text(font_placement, description, font_color, font=font)
     draw = ImageDraw.Draw(img)
     # If no vid_hash directory, create one
-    dir_path = "slides\\" + vid_hash
+    dir_path = "slides/" + vid_hash
     if not os.path.isdir("slides"):
         os.mkdir("slides")
     if not os.path.isdir(dir_path):
         os.mkdir(dir_path)
-    new_filename = dir_path + "\\img-" + "{:02d}".format(count) + ".png"
+    new_filename = dir_path + "/img-" + "{:02d}".format(count) + ".png"
     img.save(new_filename)
 
     return new_filename
@@ -105,7 +105,7 @@ def insert_newline(description, font_size):
     words = ''.join(description).split(' ')
     for i in range(len(words)):
         char_count += len(words[i]) + 1
-        if (char_count * (int)(font_size * (0.5))) > 1200:
+        if (char_count * int(font_size * 0.5)) > 1200:
             words.insert(i, '\n')
             i += 1
             char_count = 0
