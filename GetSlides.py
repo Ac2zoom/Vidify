@@ -74,6 +74,8 @@ def overlay_text_on_image(keyword, description, vid_hash, count):
     draw = ImageDraw.Draw(img)
     # If no vid_hash directory, create one
     dir_path = "slides/" + vid_hash
+    if not os.path.isdir("slides"):
+        os.mkdir("slides")
     if not os.path.isdir(dir_path):
         os.mkdir(dir_path)
     new_filename = dir_path + "/img-" + "{:02d}".format(count) + ".png"
