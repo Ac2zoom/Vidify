@@ -3,14 +3,15 @@ from PIL import ImageFont, Image, ImageDraw
 import cv2
 import os
 
-"""
-Loops through all the given keywords and generates slides by 
-finding images for the keywords and overlaying their descriptions onto the images. 
-Saves the resulting images in the 'slides' folder
-@description_map:   a HashMap matching the keyword (String) with its description (String)
-@return:            Saves resulting slides to 'slides' folder
-"""
+
 def make_slides(description_map):
+    """
+    Loops through all the given keywords and generates slides by
+    finding images for the keywords and overlaying their descriptions onto the images.
+    Saves the resulting images in the 'slides' folder
+    @description_map:   a HashMap matching the keyword (String) with its description (String)
+    @return:            Saves resulting slides to 'slides' folder
+    """
     image_arr = []
     for keyword in description_map:
         get_image(keyword)
@@ -19,12 +20,13 @@ def make_slides(description_map):
         image_arr.append(image)
     return image_arr
 
-"""
-Finds all the images for the given keywords and downloads them into the downloads folder
-@keywords:  a comma separated list of keywords for images
-@return:    Saves the images to the downloads folder
-"""
+
 def get_image(keywords):
+    """
+    Finds all the images for the given keywords and downloads them into the downloads folder
+    @keywords:  a comma separated list of keywords for images
+    @return:    Saves the images to the downloads folder
+    """
     response = google_images_download.googleimagesdownload()
     arguments = {"keywords":keywords,
     # "suffix_keywords":"no watermark",
@@ -36,12 +38,6 @@ def get_image(keywords):
     "print_urls":True}
     paths = response.download(arguments)
 
-"""
-Finds the image associated with that keyword and overlays the description over the top of it
-@keyword:       The title of the image that needs a description (String)
-@description:   Short sentence to overlay on the image (String)
-@return:        Saves the image to 'slides' folder
-"""
 def overlay_text_on_image(keyword, description):
     # keyword = keyword + " no watermark"
     for file in os.listdir("downloads/" + keyword):
