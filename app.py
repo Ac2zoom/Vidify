@@ -32,8 +32,8 @@ def demo():
 # Endpoint to handle keywords
 @app.route("/vidify", methods=['GET', 'POST'])
 def vidify():
-    source_url = request.args.get('source')
-    text = request.args.get('text')
+    source_url = request.form.get('source')
+    text = request.form.get('text')
     # Summarize text
     # Return Tuple of Gensim Summarization and Comprehend_Phrases
     content = get_key_phrases(url_or_file=None, words=text)
