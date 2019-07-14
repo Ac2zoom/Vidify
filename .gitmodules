@@ -1,0 +1,3 @@
+[submodule "vidtext"]
+	path = vidtext
+	url = https://github.com/Ac2zoom/vidtext.git
