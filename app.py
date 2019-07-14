@@ -41,12 +41,17 @@ def vidify():
     # TODO: Verify that this works given that each index of content[1] is a list
     vid_hash = hex(hash(str(content[1])))
     gen_video(content, vid_hash)
-    return render_template("video.html", source=source_url, video="/video/" + vid_hash)
+    return render_template("video.html", source=source_url, video="/video/" + vid_hash, audio="/audio/" + vid_hash)
 
 
 @app.route("/video/<vid_hash>", methods=['GET', 'POST'])
 def video(vid_hash):
-    return send_file('slides/' + vid_hash + '/output.mp4')
+    return send_file('slides/' + vid_hash + '/video.mp4')
+
+
+@app.route("/audio/<vid_hash>", methods=['GET', 'POST'])
+def audio(vid_hash):
+    return send_file('slides/' + vid_hash + '/complete_reading.mp3')
 
 
 def gen_video(content, vid_hash):
@@ -91,11 +96,10 @@ def gen_video(content, vid_hash):
         # Concatenate up a singular sound file
         if sound is None:
             sound = speech_temp
-            break
         else:
             sound += speech_temp
     # Build a singular sound file
-    sound.export("slides/" + vid_hash + "/complete_reading.wav", format="wav")
+    sound.export("slides/" + vid_hash + "/complete_reading.mp3", format="wav")
 
     # Merge sound and video file
     # videoMP4 = ffmpeg.input("cd slides/" + vid_hash + "/video.mp4")
@@ -104,5 +108,5 @@ def gen_video(content, vid_hash):
     # merged.output("cd slides/" + vid_hash + "/video2.mp4")
     # os.rename("slides/video2.mp4", "slides/video.mp4")
     os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
-    # os.system("cd slides/" + vid_hash + "; ffmpeg -i video.mp4 -i complete_reading.wav -c copy output.mp4")
+    os.system("cd slides/" + vid_hash + "; ffmpeg -i video.mp4 -i complete_reading.mp3 -c copy output.mp4")
     # Not sure we need this here since output will create the final video
