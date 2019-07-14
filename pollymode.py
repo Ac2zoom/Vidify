@@ -8,7 +8,7 @@ import boto3
 import os
 import string
 import sys
-import subprocess
+#import subprocess
 from tempfile import gettempdir
 from contextlib import closing
 from botocore.exceptions import BotoCoreError, ClientError
@@ -37,16 +37,16 @@ from polly.access_key import *
 
 #PollySynth class for polly,
 #Currently supports simple text
+
 class PollySynth():
     
     #Guess of the not billable characters
     notbillable = string.punctuation.join(string.whitespace)
     
-    def __init__(self):
-        
+    def __init__(self, voice = "Joanna"):
         self.p = boto3.client(
         'polly',
-        aws_access_key_id=ACCESS_KEY,
+        aws_access_key_id= ACCESS_KEY,
         aws_secret_access_key=SECRET_KEY,
         region_name='us-west-2')
         ## Possible Voices
@@ -58,12 +58,19 @@ class PollySynth():
         'Maja','Marlene','Mathieu','Matthew','Maxim','Mia','Miguel','Mizuki','Naja','Nicole','Penelope',
         'Raveena','Ricardo','Ruben','Russell','Salli','Seoyeon','Takumi','Tatyana','Vicki','Vitoria','Zeina',
         'Zhiyu']
+        self.Voice = voice
+        
+    def list_voices(self):
+        return self.voices
                 
     
     # For the simple instance of Mp3 generation for less than 6000 total characters
     # and less than 3000 billable characters, (Assuming this means alphanumeric)
     # produce a voice text and return the file path to that object
-    def mp3_speak(self, filename, text: str, Voice = "Joanna"):
+    def mp3_speak(self, filename, text: str, Voice, type_="text"):
+        # Set initial attributes
+        if Voice is None:
+            Voice = self.Voice
         
         # Create a suitable filename
         filename = filename + hex(hash(text)) + "-" + Voice + ".mp3"
@@ -78,7 +85,7 @@ class PollySynth():
             sys.exit(-1)
         try:
             # Request speech synthesis
-            response = p.synthesize_speech(Text=text, OutputFormat="mp3", VoiceId=Voice)
+            response = p.synthesize_speech(Text=text, OutputFormat="mp3", VoiceId=Voice, TextType= type_)
         except (BotoCoreError, ClientError) as error:
             # The service returned an error, exit gracefully
             print(error)
