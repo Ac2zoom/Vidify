@@ -75,6 +75,9 @@ def overlay_text_on_image(keyword, description):
     img.save(new_filename)
     return cv2.imread(new_filename)
 
+def insert_newline(description):
+    
+    return new_description
 
 def get_back_size(description):
     line_count = 125
