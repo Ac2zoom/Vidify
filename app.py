@@ -4,6 +4,7 @@ import os
 import pollymode
 from summarize import get_key_phrases
 from pydub import AudioSegment
+import ffmpeg
 
 app = Flask(__name__)
 
@@ -33,9 +34,10 @@ def vidify():
     source_url = request.args.get('source')
     text = request.args.get('text')
     # Summarize text
-    content = get_key_phrases(text)  # Return Tuple of Gensim Summarization and Comprehend_Phrases
+    # Return Tuple of Gensim Summarization and Comprehend_Phrases
+    content = get_key_phrases(url_or_file=None, words=text)
     # TODO: Verify that this works given that each index of content[1] is a list
-    vid_hash = hex(hash(''.join(content[1])))
+    vid_hash = hex(hash(str(content[1])))
     gen_video(content, vid_hash)
     return render_template("video.html", source=source_url, video="/video/" + vid_hash)
 
@@ -62,25 +64,31 @@ def gen_video(content, vid_hash):
     # TODO: Switch to using ffmpeg-python
     
     # Create file to build up reading sound
-    sound = new AudioSegment()
+    sound = AudioSegment()
+    # Create empty video file to build up video
+    open("cd slides/" + vid_hash + 'video.mp4', 'a').close()
 
     # Loop through all sentences and create a recording for each one
-    for i in range(len(sentence_list))
-        synth = new PollySynth()
-        speach = synth.mp3_speak("img" + i + ".mp3", sentence_list[i], None)
+    for i in range(len(sentence_list)):
+        synth = pollymode.PollySynth()
+        speech = str(synth.mp3_speak("img" + str(i), sentence_list[i], None))
         # TODO: Get time to play file
-        # TODO: Make individual slide videos
+        speech_temp = AudioSegment.from_mp3(speech)
+        time = speech_temp.duration_seconds
+        vs = 1 / time
 
+        os.system("cd slides/" + vid_hash + "; ffmpeg - framerate " + str(vs) + " -i img-" + str(i) + ".png video2.mp4")
+        os.system("cd slides/" + vid_hash + ";ffmpeg -i “concat:video.mp4|video2.mp4” video.mp4")
         # Concatenate up a singular sound file
-        sound += speach
+        sound += speech
     # Build a singular sound file
     sound.export("complete_reading.mp3", format="mp3")
 
     # Merge sound and video file
-    videoMP4 = ffmpeg.input("video.mp4")
+    videoMP4 = ffmpeg.input("cd slides/" + vid_hash + "/video.mp4")
     audioMP3 = ffmpeg.input("complete_reading.mp3")
     merged = ffmpeg.concat(videoMP4, audioMP3, v=1, a=1)
-    output  = ffmpeg.output(merged[0], merged[1], "video.mp4")
+    output = ffmpeg.output(merged[0], merged[1], "cd slides/" + vid_hash + "/video.mp4")
 
     # Not sure we need this here since output will create the final video
-    os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")
+    # os.system("cd slides/" + vid_hash + "; ffmpeg -framerate " + str(vs) + " -i img-%02d.png video.mp4")

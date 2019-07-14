@@ -89,6 +89,13 @@ class PollySynth():
             return (response)
         except (BotoCoreError, ClientError) as error:
             print(error)
+
+     # Add primitive ssml emphasis by translation      
+    def emphasis_parser(self, keywords: set, text: str) -> str:
+        for word in keywords:
+            text = text.replace(word, "<emphasis level=\"strong\">" + word + "</emphasis>" )
+        return "<speak>" + text + "</speak>"
+        
             
     def mp3_speak(self, prefix, text: str, Voice=None, type_="text"):
         # Set initial attributes
