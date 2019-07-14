@@ -16,9 +16,9 @@ def index():
     return render_template('page1.html')
 
 
-@app.route('/assets/<file>')
-def asset(file):
-    return send_file('assets/' + file)
+@app.route('/assets/<path:subpath>')
+def asset(subpath):
+    return send_file('assets/' + subpath)
 
 
 @app.route('/demo')
