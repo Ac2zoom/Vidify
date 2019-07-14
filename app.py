@@ -43,7 +43,7 @@ def gen_video(content):
     # Form description_map (same key/value for now)
     description_map = {sentence: sentence for sentence in content}
     # Call make_slides
-    img_array = GetSlides.make_slides(description_map)
+    img_array = GetSlides.make_slides(description_map, hex(hash(''.join(content))))
     # Turn image_arr into video
     # TODO: Figure out how to append audio from Jasper's work
     # TODO: Accept vs, size, and font from user
