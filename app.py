@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 import cv2
 import GetSlides
 import vidtext
 import re
 import os
+import mimetypes
 
 app = Flask(__name__)
 
@@ -69,8 +70,10 @@ def partial_response(path, start, end=None):
     )
     return response
 
+
 def get_range(request):
     range = request.headers.get('Range')
+    print(request.headers)
     m = re.match('bytes=(?P<start>\d+)-(?P<end>\d+)?', range)
     if m:
         start = m.group('start')
@@ -78,6 +81,7 @@ def get_range(request):
         start = int(start)
         if end is not None:
             end = int(end)
+        print(start, end)
         return start, end
     else:
         return 0, None
