@@ -7,7 +7,7 @@ from PIL import ImageFont, Image, ImageDraw
 import cv2
 import os
 import vidtext
-from flask.json import jsonify
+
 app = Flask(__name__)
 
 
@@ -24,23 +24,34 @@ def vidify():
     text = request.args.get('text')
     # TODO: Summarize text (use Rock's functions)
     content = vidtext.summary(text)  # Return List
-    # Call get_image and overlay_text_on_image iteratively
-    for sentence in content:
-        paths = get_image(sentence)
-        # TODO: Use keyword as keyword, sentence as description
-        overlay_text_on_image(sentence, sentence)
-    # TODO: Modify HTML template to include multiple images
-    return send_file("slides/" + content[0] + " no watermark.jpg")
+    gen_video(content)
+    return send_file("project.mp4")
 
 
-"""
-Loops through all the given keywords and generates slides by 
-finding images for the keywords and overlaying their descriptions onto the images. 
-Saves the resulting images in the 'slides' folder
-@description_map:   a HashMap matching the keyword (String) with its description (String)
-@return:            Saves resulting slides to 'slides' folder
-"""
+def gen_video(content):
+    # Form description_map (same key/value for now)
+    description_map = {sentence: sentence for sentence in content}
+    # Call make_slides
+    img_array = make_slides(description_map)
+    # TODO: Turn image_arr into video
+    # TODO: Figure out how to append audio from Jasper's work
+    # TODO: Accept vs, size, and font from user
+    vs = 0.1
+    size = (1280, 720)
+    out = cv2.VideoWriter('project.mp4', cv2.VideoWriter_fourcc(*'mp4v'), vs, size)
+    for i in range(len(img_array)):
+        out.write(img_array[i])
+    out.release()
+
+
 def make_slides(description_map):
+    """
+    Loops through all the given keywords and generates slides by
+    finding images for the keywords and overlaying their descriptions onto the images.
+    Saves the resulting images in the 'slides' folder
+    @description_map:   a HashMap matching the keyword (String) with its description (String)
+    @return:            Saves resulting slides to 'slides' folder
+    """
     image_arr = []
     for keyword in description_map:
         get_image(keyword)
@@ -98,5 +109,5 @@ def overlay_text_on_image(keyword, description):
     draw.text(font_placement, description, font_color, font=font)
     draw = ImageDraw.Draw(img)
     img.save("slides/" + keyword + ".png")
-    return cv2.imread(filename)
+    return cv2.imread("slides/")
 
