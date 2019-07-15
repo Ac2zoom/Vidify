@@ -13,7 +13,10 @@ from contextlib import closing
 from botocore.exceptions import BotoCoreError, ClientError
 
 #Get access key from following
-# from polly.access_key import *
+try:
+    from polly.access_key import *
+except Exception:
+    pass
 #Should contain:
 # ACCESS_KEY
 # SECRET_KEY

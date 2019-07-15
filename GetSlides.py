@@ -21,15 +21,20 @@ def make_slides(description_map, vid_hash):
         keywords = " ".join(description_map[description])
         if keywords is "":
             continue
-        image_path = get_image(keywords)
+        image_path = get_image(keywords, 1)
         print(image_path)
-        image = overlay_text_on_image(image_path[0][list(image_path[0].keys())[0]][0], description, vid_hash, count)
+        image_filename = image_path[0][list(image_path[0].keys())[0]][0]
+        if image_filename is "":
+            image_path = get_image(keywords, 2)
+            print(image_path)
+            image_filename = image_path[0][list(image_path[0].keys())[0]][1]
+        image = overlay_text_on_image(image_filename, description, vid_hash, count)
         image_arr.append(image)
         count += 1
     return image_arr
 
 
-def get_image(keywords):
+def get_image(keywords, num_images):
     """
     Finds all the images for the given keywords and downloads them into the downloads folder
     @keywords:  a comma separated list of keywords for images
@@ -43,7 +48,7 @@ def get_image(keywords):
         "format": "jpg",
         "aspect_ratio": "wide",
         "usage_rights": "labeled-for-reuse-with-modifications",
-        "limit": 1,
+        "limit": num_images,
         "size": "large",
         "print_urls": True}
     return response.download(arguments)
@@ -64,6 +69,7 @@ def overlay_text_on_image(filename, description, vid_hash, count):
     # (R, G, B)
     font_color = (250, 250, 250)
     background_color = (0, 0, 0)
+    print("Image filename: " + filename)
     img = Image.open(filename)
 
     img = img.resize((1280, 720), resample=0)
